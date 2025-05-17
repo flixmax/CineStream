@@ -38,7 +38,6 @@
       font-size: 1em;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
 
     nav button:hover {
@@ -65,73 +64,25 @@
 
     .movie-card img {
       width: 100%;
+      height: 350px;
+      object-fit: cover;
       border-radius: 10px;
       margin-bottom: 10px;
-      object-fit: cover;
-      height: 350px;
     }
 
-    .btn-modern {
-      background: linear-gradient(45deg, #e50914, #f40612);
+    .movie-card button {
+      background-color: #0ff;
       border: none;
-      color: white;
-      padding: 12px 25px;
+      color: #000;
+      padding: 10px;
       font-size: 1em;
       border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s ease;
-      font-weight: 700;
-      box-shadow: 0 4px 10px rgba(229, 9, 20, 0.7);
-      width: 100%;
-      max-width: 250px;
+      transition: all 0.3s ease;
     }
 
-    .btn-modern:hover {
-      background: linear-gradient(45deg, #f40612, #e50914);
-      box-shadow: 0 6px 14px rgba(244, 6, 18, 0.9);
-    }
-
-    .btn-reset {
-      background: #444;
-      color: #eee;
-      border: none;
-      padding: 10px 20px;
-      margin-top: 10px;
-      font-size: 0.9em;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 100%;
-      max-width: 250px;
-    }
-
-    .btn-reset:hover {
-      background-color: #666;
-    }
-
-    .movie-card.series {
-      max-width: 1000px;
-      width: 100%;
-    }
-
-    .series-cover {
-      width: 250px;
-      height: 350px;
-      border-radius: 10px;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-
-    .episodes-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      justify-content: center;
-    }
-
-    .episode-btn-container {
-      max-width: 150px;
-      text-align: center;
+    .movie-card button:hover {
+      background-color: #0cc;
     }
 
     footer {
@@ -164,34 +115,49 @@
     <div class="movie-card acao">
       <img src="https://br.web.img2.acsta.net/img/d2/c1/d2c108f1e8523f4f16fbfb539e0f3e48.png" alt="Gananciosos">
       <h3>Gananciosos (2024)</h3>
-      <button class="btn-modern" onclick="window.open('https://drive.google.com/file/d/10IfMvC8IyrDcpz5AZIbQJVapQJLTPNo5/preview', '_blank')">
+      <button onclick="window.open('https://drive.google.com/file/d/10IfMvC8IyrDcpz5AZIbQJVapQJLTPNo5/preview', '_blank')">
         ▶️ Assistir
       </button>
     </div>
 
     <!-- Série: Mr. Robot (2017) Segunda Temporada -->
     <div class="movie-card series">
-      <img class="series-cover" src="https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-4840-622f-8180-c0893fef4097/raw?se=2025-05-17T04%3A30%3A25Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=bbd22fc4-f881-4ea4-b2f3-c12033cf6a8b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-17T03%3A25%3A09Z&ske=2025-05-18T03%3A25%3A09Z&sks=b&skv=2024-08-04&sig=pjJUwQZDuytOIRZTSKPfY%2Be%2BuDjWib9DEPlKoqHTAKc%3D" alt="Mr. Robot Segunda Temporada">
-      
-      <button id="mainEpisodeBtn" class="btn-modern">
-        ▶️ Assistir Episódio 1
-      </button>
-      <button id="resetBtn" class="btn-reset">
-        🔄 Ver desde o Início
-      </button>
+      <img src="https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-4840-622f-8180-c0893fef4097/raw?se=2025-05-17T04%3A30%3A25Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=bbd22fc4-f881-4ea4-b2f3-c12033cf6a8b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-17T03%3A25%3A09Z&ske=2025-05-18T03%3A25%3A09Z&sks=b&skv=2024-08-04&sig=pjJUwQZDuytOIRZTSKPfY%2Be%2BuDjWib9DEPlKoqHTAKc%3D" alt="Mr. Robot Segunda Temporada">
+      <h3>Mr. Robot - 2ª Temporada (2017)</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+        <button onclick="window.open('https://drive.google.com/file/d/1N9ILhLZGfz2_4fiLGkWCCiLuxIE83uLL/preview', '_blank')">▶️ Ep 2</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1gr0HfGnwWP1lk_8AI-SRKTGhXg7dv-au/preview', '_blank')">▶️ Ep 3</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1_R4t0MBt_ltY2wlYmyzHu_scVtKXGpH5/preview', '_blank')">▶️ Ep 4</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1KTuiKdVexP1SPCgYHidq0mzRjMtNud9Y/preview', '_blank')">▶️ Ep 5</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1R4iAP_PfJ1dZbeoq7LeLq0PQdQRWi-eD/preview', '_blank')">▶️ Ep 6</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1GTF7vG1eMNmr914TnwSQckybJVvDIYOi/preview', '_blank')">▶️ Ep 7</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1GTSFcJ5iipKP7sUKJ_uGd1aRbNXOSJvp/preview', '_blank')">▶️ Ep 8</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1Aq9iyF7Cp6uKpL4aOKlmBDR53YAuCfd3/preview', '_blank')">▶️ Ep 9</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1W71v-cTUUYlimY9eDfEwtv8B_bzZhrix/preview', '_blank')">▶️ Ep 10</button>
+        <button onclick="window.open('https://drive.google.com/file/d/1SCY8o89DtUPCpiIX8QhqlnBtf4kUmfie/preview', '_blank')">▶️ Ep 11</button>
+        <button onclick="window.open('https://drive.google.com/file/d/18oekgrFzS4Si_eS5C9adhAoOHUxDBjFJ/preview', '_blank')">▶️ Ep 12</button>
+      </div>
+    </div>
 
-      <div class="episodes-container">
-        <div class="episode-btn-container">
-          <button class="btn-modern" onclick="openEpisode(1)">▶️ Episódio 1</button>
-        </div>
-        <div class="episode-btn-container">
-          <button class="btn-modern" onclick="openEpisode(2)">▶️ Episódio 2</button>
-        </div>
-        <div class="episode-btn-container">
-          <button class="btn-modern" onclick="openEpisode(3)">▶️ Episódio 3</button>
-        </div>
-        <div class="episode-btn-container">
-          <button class="btn-modern" onclick="openEpisode(4)">▶️ Episódio 4</button>
-        </div>
-        <div class="episode-btn-container">
-          <button class="
+  </div>
+
+  <footer>© 2025 PlayMaxx - Todos os direitos reservados</footer>
+
+  <script>
+    function filterCategory(category) {
+      const allCards = document.querySelectorAll('.movie-card');
+      allCards.forEach(card => {
+        if (category === 'todos' || card.classList.contains(category)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Mostrar todos os filmes por padrão
+    filterCategory('todos');
+  </script>
+
+</body>
+</html>

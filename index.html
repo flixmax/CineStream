@@ -117,12 +117,11 @@
       </button>
     </div>
 
-    <!-- Série: Exemplo - Série X -->
+    <!-- Série: Mr. Robot (2017) - com controle de progresso -->
     <div class="movie-card series" style="display: block; width: 100%; max-width: 1000px;">
-      <!-- Capa principal da série -->
       <div style="position: relative; margin-bottom: 20px;">
-        <img src="https://via.placeholder.com/1000x400?text=Série+X" alt="Série X" style="width: 100%; border-radius: 10px;">
-        <button onclick="window.open('https://drive.google.com/file/d/ID_EP_ATUAL/preview', '_blank')"
+        <img src="https://media.fstatic.com/RLeRwo3k21aksjU9TBaRFln2ssU=/210x312/smart/filters:format(webp)/media/movies/covers/2016/07/mr-robot-2a-temporada_t126746_tF5sz4K.jpg" alt="Mr. Robot" style="width: 100%; border-radius: 10px;">
+        <button id="mainEpisodeBtn" 
           style="
             position: absolute;
             bottom: 20px;
@@ -135,38 +134,25 @@
             border-radius: 5px;
             cursor: pointer;
           ">
-          ▶️ Continuar Episódio 3
+          ▶️ Assistir Episódio 1
         </button>
       </div>
 
-      <!-- Lista de episódios -->
-      <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+      <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; align-items: center;">
         <div style="text-align: center;">
-          <img src="https://via.placeholder.com/150x220?text=Ep+1" alt="Episódio 1" style="border-radius: 5px;">
+          <img src="https://media.fstatic.com/RLeRwo3k21aksjU9TBaRFln2ssU=/210x312/smart/filters:format(webp)/media/movies/covers/2016/07/mr-robot-2a-temporada_t126746_tF5sz4K.jpg" alt="Ep 1" style="border-radius: 5px; width: 150px; height: 220px; object-fit: cover;">
           <br />
-          <button onclick="window.open('https://drive.google.com/file/d/ID_EP1/preview', '_blank')"
+          <button id="episode1Btn"
             style="margin-top: 10px; background: #0ff; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
-            ▶️ Ep 1
+            ▶️ Assistir Episódio 1
           </button>
         </div>
 
-        <div style="text-align: center;">
-          <img src="https://via.placeholder.com/150x220?text=Ep+2" alt="Episódio 2" style="border-radius: 5px;">
-          <br />
-          <button onclick="window.open('https://drive.google.com/file/d/ID_EP2/preview', '_blank')"
-            style="margin-top: 10px; background: #0ff; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
-            ▶️ Ep 2
-          </button>
-        </div>
-
-        <div style="text-align: center;">
-          <img src="https://via.placeholder.com/150x220?text=Ep+3" alt="Episódio 3" style="border-radius: 5px;">
-          <br />
-          <button onclick="window.open('https://drive.google.com/file/d/ID_EP3/preview', '_blank')"
-            style="margin-top: 10px; background: #0ff; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
-            ▶️ Ep 3
-          </button>
-        </div>
+        <!-- Botão para ver desde o início -->
+        <button id="resetBtn"
+          style="background: #f00; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; height: 40px;">
+          🔄 Ver desde o Início
+        </button>
       </div>
     </div>
 
@@ -188,6 +174,42 @@
 
     // Mostrar todos os filmes por padrão
     filterCategory('todos');
+
+    // Controle de progresso para Mr. Robot Episódio 1
+    const episodeKey = 'mrRobotEp1Started';
+    const episodeUrl = 'https://drive.google.com/file/d/1con-RTUVBdDXpYugnizXqpv4q_gcKKrm/preview';
+
+    const mainBtn = document.getElementById('mainEpisodeBtn');
+    const ep1Btn = document.getElementById('episode1Btn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function updateButtonText() {
+      const started = localStorage.getItem(episodeKey);
+      if (started) {
+        mainBtn.textContent = '▶️ Continuar Episódio 1';
+        ep1Btn.textContent = '▶️ Continuar Episódio 1';
+      } else {
+        mainBtn.textContent = '▶️ Assistir Episódio 1';
+        ep1Btn.textContent = '▶️ Assistir Episódio 1';
+      }
+    }
+
+    function openEpisode() {
+      window.open(episodeUrl, '_blank');
+      localStorage.setItem(episodeKey, 'true');
+      updateButtonText();
+    }
+
+    function resetProgress() {
+      localStorage.removeItem(episodeKey);
+      updateButtonText();
+    }
+
+    mainBtn.addEventListener('click', openEpisode);
+    ep1Btn.addEventListener('click', openEpisode);
+    resetBtn.addEventListener('click', resetProgress);
+
+    updateButtonText();
   </script>
 
 </body>

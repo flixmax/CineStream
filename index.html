@@ -27,6 +27,7 @@
       gap: 15px;
       padding: 15px;
       background-color: #111;
+      flex-wrap: wrap;
     }
 
     nav button {
@@ -37,7 +38,7 @@
       font-size: 1em;
       border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background-color 0.3s ease;
     }
 
     nav button:hover {
@@ -60,58 +61,77 @@
       max-width: 250px;
       text-align: center;
       box-shadow: 0 0 10px #0ff3;
-      display: none;
     }
 
     .movie-card img {
       width: 100%;
       border-radius: 10px;
       margin-bottom: 10px;
+      object-fit: cover;
+      height: 350px;
     }
 
-    /* Botões modernos estilo Netflix */
     .btn-modern {
-      background: linear-gradient(90deg, #e50914 0%, #b20710 100%);
-      color: #fff;
+      background: linear-gradient(45deg, #e50914, #f40612);
       border: none;
-      padding: 12px 30px;
+      color: white;
+      padding: 12px 25px;
       font-size: 1em;
-      font-weight: 600;
-      border-radius: 25px;
+      border-radius: 5px;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(229, 9, 20, 0.6);
-      transition: background 0.3s ease, transform 0.2s ease;
-      user-select: none;
+      transition: background 0.3s ease;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(229, 9, 20, 0.7);
+      width: 100%;
+      max-width: 250px;
     }
 
     .btn-modern:hover {
-      background: linear-gradient(90deg, #b20710 0%, #e50914 100%);
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(229, 9, 20, 0.8);
+      background: linear-gradient(45deg, #f40612, #e50914);
+      box-shadow: 0 6px 14px rgba(244, 6, 18, 0.9);
     }
 
-    /* Botão "Ver desde o Início" estilo Netflix invertido */
     .btn-reset {
-      background: #222;
-      color: #e50914;
-      border: 2px solid #e50914;
-      padding: 12px 30px;
-      font-size: 1em;
-      font-weight: 600;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: none;
-      transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      width: 100%;
+      background: #444;
+      color: #eee;
+      border: none;
+      padding: 10px 20px;
       margin-top: 10px;
+      font-size: 0.9em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      max-width: 250px;
     }
 
     .btn-reset:hover {
-      background: #e50914;
-      color: #fff;
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(229, 9, 20, 0.8);
+      background-color: #666;
+    }
+
+    .movie-card.series {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .series-cover {
+      width: 250px;
+      height: 350px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .episodes-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .episode-btn-container {
+      max-width: 150px;
+      text-align: center;
     }
 
     footer {
@@ -149,77 +169,29 @@
       </button>
     </div>
 
-    <!-- Série: Mr. Robot (2017) - com controle de progresso -->
-    <div class="movie-card series" style="display: block; max-width: 250px; width: 100%;">
-      <div style="position: relative; margin-bottom: 20px;">
-        <img src="https://media.fstatic.com/RLeRwo3k21aksjU9TBaRFln2ssU=/210x312/smart/filters:format(webp)/media/movies/covers/2016/07/mr-robot-2a-temporada_t126746_tF5sz4K.jpg" alt="Mr. Robot" style="width: 100%; border-radius: 10px;">
-        <button id="mainEpisodeBtn" class="btn-modern"
-          style="
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-          ">
-          ▶️ Assistir Episódio 1
-        </button>
-      </div>
-
-      <!-- Botão para ver desde o início -->
+    <!-- Série: Mr. Robot (2017) Segunda Temporada -->
+    <div class="movie-card series">
+      <img class="series-cover" src="https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-4840-622f-8180-c0893fef4097/raw?se=2025-05-17T04%3A30%3A25Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=bbd22fc4-f881-4ea4-b2f3-c12033cf6a8b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-17T03%3A25%3A09Z&ske=2025-05-18T03%3A25%3A09Z&sks=b&skv=2024-08-04&sig=pjJUwQZDuytOIRZTSKPfY%2Be%2BuDjWib9DEPlKoqHTAKc%3D" alt="Mr. Robot Segunda Temporada">
+      
+      <button id="mainEpisodeBtn" class="btn-modern">
+        ▶️ Assistir Episódio 1
+      </button>
       <button id="resetBtn" class="btn-reset">
         🔄 Ver desde o Início
       </button>
-    </div>
 
-  </div>
-
-  <footer>© 2025 PlayMaxx - Todos os direitos reservados</footer>
-
-  <script>
-    function filterCategory(category) {
-      const allCards = document.querySelectorAll('.movie-card');
-      allCards.forEach(card => {
-        if (category === 'todos' || card.classList.contains(category)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    // Mostrar todos os filmes por padrão
-    filterCategory('todos');
-
-    // Controle de progresso para Mr. Robot Episódio 1
-    const episodeKey = 'mrRobotEp1Started';
-    const episodeUrl = 'https://drive.google.com/file/d/1con-RTUVBdDXpYugnizXqpv4q_gcKKrm/preview';
-
-    const mainBtn = document.getElementById('mainEpisodeBtn');
-    const resetBtn = document.getElementById('resetBtn');
-
-    function updateButtonText() {
-      const started = localStorage.getItem(episodeKey);
-      if (started) {
-        mainBtn.textContent = '▶️ Continuar Episódio 1';
-      } else {
-        mainBtn.textContent = '▶️ Assistir Episódio 1';
-      }
-    }
-
-    function openEpisode() {
-      window.open(episodeUrl, '_blank');
-      localStorage.setItem(episodeKey, 'true');
-      updateButtonText();
-    }
-
-    function resetProgress() {
-      localStorage.removeItem(episodeKey);
-      updateButtonText();
-    }
-
-    mainBtn.addEventListener('click', openEpisode);
-    resetBtn.addEventListener('click', resetProgress);
-
-    updateButtonText();
-  </script>
-
-</body>
-</html>
+      <div class="episodes-container">
+        <div class="episode-btn-container">
+          <button class="btn-modern" onclick="openEpisode(1)">▶️ Episódio 1</button>
+        </div>
+        <div class="episode-btn-container">
+          <button class="btn-modern" onclick="openEpisode(2)">▶️ Episódio 2</button>
+        </div>
+        <div class="episode-btn-container">
+          <button class="btn-modern" onclick="openEpisode(3)">▶️ Episódio 3</button>
+        </div>
+        <div class="episode-btn-container">
+          <button class="btn-modern" onclick="openEpisode(4)">▶️ Episódio 4</button>
+        </div>
+        <div class="episode-btn-container">
+          <button class="

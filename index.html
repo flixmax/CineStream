@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CineStream</title>
+  <title>PlayMaxx</title>
   <style>
     body {
       margin: 0;
@@ -27,7 +27,6 @@
       gap: 15px;
       padding: 15px;
       background-color: #111;
-      flex-wrap: wrap;
     }
 
     nav button {
@@ -95,7 +94,7 @@
 </head>
 <body>
 
-  <header>🎬 CineStream</header>
+  <header>🎬 PlayMaxx</header>
 
   <nav>
     <button onclick="filterCategory('todos')">Todos</button>
@@ -105,12 +104,12 @@
     <button onclick="filterCategory('drama')">Drama</button>
     <button onclick="filterCategory('suspense')">Suspense</button>
     <button onclick="filterCategory('series')">Séries</button>
-    <button onclick="filterCategory('recentes')">Adicionados Recentemente</button>
   </nav>
 
   <div class="container">
+
     <!-- Filme: Gananciosos (2024) - Ação -->
-    <div class="movie-card acao recentes">
+    <div class="movie-card acao">
       <img src="https://br.web.img2.acsta.net/img/d2/c1/d2c108f1e8523f4f16fbfb539e0f3e48.png" alt="Gananciosos">
       <h3>Gananciosos (2024)</h3>
       <button onclick="window.open('https://drive.google.com/file/d/10IfMvC8IyrDcpz5AZIbQJVapQJLTPNo5/preview', '_blank')">
@@ -118,41 +117,59 @@
       </button>
     </div>
 
-    <!-- Série: Caçadores de Mistérios (2023) - Séries, Suspense -->
-    <div class="movie-card series suspense recentes">
-      <img src="https://via.placeholder.com/250x350?text=Ca%C3%A7adores+de+Mist%C3%A9rios" alt="Caçadores de Mistérios">
-      <h3>Caçadores de Mistérios (2023)</h3>
-      <button onclick="window.open('https://drive.google.com/file/d/EXEMPLO_DE_LINK_SERIE/preview', '_blank')">
-        ▶️ Assistir
-      </button>
+    <!-- Série: Exemplo - Série X -->
+    <div class="movie-card series" style="display: block; width: 100%; max-width: 1000px;">
+      <!-- Capa principal da série -->
+      <div style="position: relative; margin-bottom: 20px;">
+        <img src="https://via.placeholder.com/1000x400?text=Série+X" alt="Série X" style="width: 100%; border-radius: 10px;">
+        <button onclick="window.open('https://drive.google.com/file/d/ID_EP_ATUAL/preview', '_blank')"
+          style="
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: #0ff;
+            color: #000;
+            padding: 15px 25px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          ">
+          ▶️ Continuar Episódio 3
+        </button>
+      </div>
+
+      <!-- Lista de episódios -->
+      <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+        <div style="text-align: center;">
+          <img src="https://via.placeholder.com/150x220?text=Ep+1" alt="Episódio 1" style="border-radius: 5px;">
+          <br />
+          <button onclick="window.open('https://drive.google.com/file/d/ID_EP1/preview', '_blank')"
+            style="margin-top: 10px; background: #0ff; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+            ▶️ Ep 1
+          </button>
+        </div>
+
+        <div style="text-align: center;">
+          <img src="https://via.placeholder.com/150x220?text=Ep+2" alt="Episódio 2" style="border-radius: 5px;">
+          <br />
+          <button onclick="window.open('https://drive.google.com/file/d/ID_EP2/preview', '_blank')"
+            style="margin-top: 10px; background: #0ff; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+            ▶️ Ep 2
+          </button>
+        </div>
+
+        <div style="text-align: center;">
+          <img src="https://via.placeholder.com/150x220?text=Ep+3" alt="Episódio 3" style="border-radius: 5px;">
+          <br />
+          <button onclick="window.open('https://drive.google.com/file/d/ID_EP3/preview', '_blank')"
+            style="margin-top: 10px; background: #0ff; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+            ▶️ Ep 3
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- Filme: Riso Fácil (2022) - Comédia -->
-    <div class="movie-card comedia">
-      <img src="https://via.placeholder.com/250x350?text=Riso+F%C3%A1cil" alt="Riso Fácil">
-      <h3>Riso Fácil (2022)</h3>
-      <button onclick="window.open('https://drive.google.com/file/d/EXEMPLO_DE_LINK_FILME/preview', '_blank')">
-        ▶️ Assistir
-      </button>
-    </div>
-
-    <!-- Série: Drama Familiar (2024) - Séries, Drama, recentes -->
-    <div class="movie-card series drama recentes">
-      <img src="https://via.placeholder.com/250x350?text=Drama+Familiar" alt="Drama Familiar">
-      <h3>Drama Familiar (2024)</h3>
-      <button onclick="window.open('https://drive.google.com/file/d/EXEMPLO_DE_LINK_SERIE_2/preview', '_blank')">
-        ▶️ Assistir
-      </button>
-    </div>
-
-    <!-- Filme: Terror Noturno (2023) - Terror -->
-    <div class="movie-card terror">
-      <img src="https://via.placeholder.com/250x350?text=Terror+Noturno" alt="Terror Noturno">
-      <h3>Terror Noturno (2023)</h3>
-      <button onclick="window.open('https://drive.google.com/file/d/EXEMPLO_DE_LINK_TERROR/preview', '_blank')">
-        ▶️ Assistir
-      </button>
-    </div>
   </div>
 
   <footer>© 2025 PlayMaxx - Todos os direitos reservados</footer>

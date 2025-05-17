@@ -1,347 +1,450 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { apiClient } from "~/client/api";
-import { motion } from "framer-motion";
-import { Plus, Play, ChevronLeft, Info } from "lucide-react";
-import { Button } from "~/components/ui";
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>CineStream</title>
+    <style>
+        /* Estilos Tailwind CSS (copiados do seu projeto, se necessário) */
+        body {
+            font-family: sans-serif; /* Substitua pela sua fonte padrão, se tiver */
+            margin: 0;
+            background-color: #09090b; /* Cor de fundo do background */
+            color: #e0e0e0; /* Cor do texto foreground */
+        }
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .fixed {
+            position: fixed;
+        }
+        .top-0 {
+            top: 0;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .z-50 {
+            z-index: 50;
+        }
+        .bg-gradient-to-b {
+            background-image: linear-gradient(to bottom, #09090b, transparent); /* Cor de fundo do background */
+        }
+        .from-background {
+            --tw-gradient-from: #09090b; /* Cor de fundo do background */
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, transparent);
+        }
+        .to-transparent {
+            --tw-gradient-to: transparent;
+        }
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .flex {
+            display: flex;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .mr-10 {
+            margin-right: 2.5rem;
+        }
+        .text-primary {
+            color: #0ea5e9; /* Cor primária */
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .md\:flex {
+                display: flex;
+            }
+        }
+        .space-x-6 > :not([hidden]) ~ :not([hidden]) {
+            margin-left: 1.5rem;
+        }
+        .text-foreground {
+            color: #e0e0e0; /* Cor do texto foreground */
+        }
+        .hover\:text-primary:hover {
+            color: #0ea5e9; /* Cor primária no hover */
+        }
+        .transition {
+            transition-property: color;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        .content-card {
+            position: relative;
+            min-width: 180px;
+            height: 270px;
+            border-radius: 0.375rem;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .object-cover {
+            object-fit: cover;
+        }
+        .absolute {
+            position: absolute;
+        }
+        .inset-0 {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .bg-gradient-to-t {
+            background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        }
+        .from-black\/80 {
+            --tw-gradient-from: rgba(0, 0, 0, 0.8);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, transparent);
+        }
+        .opacity-0 {
+            opacity: 0;
+        }
+        .hover\:opacity-100:hover {
+            opacity: 1;
+        }
+        .transition-opacity {
+            transition-property: opacity;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+        .flex-col {
+            flex-direction: column;
+        }
+        .justify-end {
+            justify-content: flex-end;
+        }
+        .p-4 {
+            padding: 1rem;
+        }
+        .font-semibold {
+            font-weight: 600;
+        }
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+        .line-clamp-2 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+        .text-xs {
+            font-size: 0.75rem;
+            line-height: 1rem;
+        }
+        .text-foreground\/80 {
+            color: rgba(224, 224, 224, 0.8); /* Cor do texto foreground com 80% de opacidade */
+        }
+        .border {
+            border-width: 1px;
+        }
+        .border-foreground\/40 {
+            border-color: rgba(224, 224, 224, 0.4); /* Cor da borda foreground com 40% de opacidade */
+        }
+        .px-1 {
+            padding-left: 0.25rem;
+            padding-right: 0.25rem;
+        }
+        .mr-2 {
+            margin-right: 0.5rem;
+        }
+        .text-foreground\/60 {
+            color: rgba(224, 224, 224, 0.6); /* Cor do texto foreground com 60% de opacidade */
+        }
+        .mb-10 {
+            margin-bottom: 2.5rem;
+        }
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+        }
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        .carousel-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+            margin-left: 1rem;
+        }
+        .pb-2 {
+            padding-bottom: 0.5rem;
+        }
+        .h-[80vh] {
+            height: 80vh;
+        }
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        .hero-gradient {
+            background-image: linear-gradient(to bottom, transparent 60%, #09090b); /* Cor de fundo do background */
+        }
+        .p-12 {
+            padding: 3rem;
+        }
+        @media (min-width: 768px) {
+            .md\:w-1\/2 {
+                width: 50%;
+            }
+        }
+        .text-4xl {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+        }
+        @media (min-width: 768px) {
+            .md\:text-5xl {
+                font-size: 3rem;
+                line-height: 1;
+            }
+        }
+        .opacity-0 {
+            opacity: 0;
+        }
+        .animate-spin {
+            animation: spin 2s linear infinite;
+        }
+        .rounded-full {
+            border-radius: 9999px;
+        }
+        .h-12 {
+            height: 3rem;
+        }
+        .w-12 {
+            width: 3rem;
+        }
+        .border-t-2 {
+            border-top-width: 2px;
+        }
+        .border-b-2 {
+            border-bottom-width: 2px;
+        }
+        .border-primary {
+            border-color: #0ea5e9; /* Cor primária */
+        }
+        .flex-col {
+            flex-direction: column;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .h-screen {
+            height: 100vh;
+        }
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
+        .mt-40 {
+            margin-top: -10rem;
+        }
+        .relative {
+            position: relative;
+        }
+        .z-10 {
+            z-index: 10;
+        }
+        @media (min-width: 768px) {
+            .md\:flex-row {
+                flex-direction: row;
+            }
+        }
+        .gap-8 {
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .md\:w-1\/3 {
+                width: 33.333333%;
+            }
+        }
+        @media (min-width: 1024px) {
+            .lg\:w-1\/4 {
+                width: 25%;
+            }
+        }
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+        .shadow-xl {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+        }
+        @media (min-width: 768px) {
+            .md\:text-4xl {
+                font-size: 2.25rem;
+                line-height: 2.5rem;
+            }
+        }
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+        .gap-4 {
+            gap: 1rem;
+        }
+        .border-foreground\/40 {
+            border-color: rgba(224, 224, 224, 0.4); /* Cor da borda foreground com 40% de opacidade */
+        }
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .rounded {
+            border-radius: 0.25rem;
+        }
+        .bg-secondary {
+            background-color: #1e293b; /* Cor secundária */
+        }
+        .text-secondary-foreground {
+            color: #f0f0f0; /* Cor do texto secundário foreground */
+        }
+        .rounded-full {
+            border-radius: 9999px;
+        }
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+        .grid {
+            display: grid;
+        }
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @media (min-width: 640px) {
+            .sm\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 768px) {
+            .md\:grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-5 {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 1280px) {
+            .xl\:grid-cols-6 {
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+            }
+        }
+        .gap-6 {
+            gap: 1.5rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .py-12 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        .min-h-screen {
+            min-height: 100vh;
+        }
+        .bg-background {
+            background-color: #09090b; /* Cor de fundo do background */
+        }
 
-// Types
-type Content = {
-  id: string;
-  title: string;
-  synopsis: string;
-  posterUrl: string;
-  backdropUrl: string;
-  type: string;
-  quality: string;
-  year: number;
-  duration?: number;
-  genres: string[];
-  featured: boolean;
-};
+        /* Estilos para botões (copiados do seu Button component) */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.375rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.25rem;
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+            background-color: #0ea5e9; /* Cor primária */
+            color: #f0f0f0; /* Cor do texto do botão primário */
+            border: 1px solid transparent;
+        }
+        .button:hover {
+            background-color: #0b81a8; /* Cor primária mais escura no hover */
+        }
+        .button-outline {
+            background-color: transparent;
+            color: #e0e0e0; /* Cor do texto do botão outline */
+            border-color: #e0e0e0; /* Cor da borda do botão outline */
+        }
+        .button-outline:hover {
+            background-color: rgba(224, 224, 224, 0.1); /* Leve fundo no hover do outline */
+        }
+        .button-ghost {
+            background-color: transparent;
+            color: #e0e0e0; /* Cor do texto do botão ghost */
+            border-color: transparent;
+            padding: 0.5rem 1rem; /* Ajuste o padding para ghost, se necessário */
+        }
+        .button-ghost:hover {
+            background-color: rgba(224, 224, 224, 0.1); /* Leve fundo no hover do ghost */
+        }
 
-// Components
-function Navbar() {
-  return (
-    <nav className="fixed top-0 w-full z-50 bg-gradient-to-b from-background to-transparent py-4">
-      <div className="container mx-auto flex items-center justify-between px-4">
-        <div className="flex items-center">
-          <Link to="/" className="text-primary font-bold text-2xl mr-10">
-            CineStream
-          </Link>
-          <div className="hidden md:flex space-x-6">
-            <Link to="/" className="text-foreground hover:text-primary transition">
-              Início
-            </Link>
-            <Link to="/categoria/movie" className="text-foreground hover:text-primary transition">
-              Filmes
-            </Link>
-            <Link to="/categoria/series" className="text-foreground hover:text-primary transition">
-              Séries
-            </Link>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
-}
+        /* Keyframes para animação de loading */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
 
-function ContentCard({ item }: { item: Content }) {
-  const navigate = useNavigate();
-  
-  return (
-    <div 
-      className="content-card relative min-w-[180px] h-[270px] rounded-md overflow-hidden cursor-pointer"
-      onClick={() => navigate(`/detalhes/${item.id}`)}
-    >
-      <img 
-        src={item.posterUrl} 
-        alt={item.title} 
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-        <h3 className="text-foreground font-semibold">{item.title}</h3>
-        <p className="text-foreground/80 text-sm line-clamp-2 mt-1">{item.synopsis}</p>
-        <div className="flex items-center mt-2 text-xs text-foreground/60">
-          <span className="border border-foreground/40 px-1 mr-2">{item.quality}</span>
-          <span>{item.year}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 
-function ContentRow({ title, items }: { title: string; items: Content[] }) {
-  if (!items || items.length === 0) return null;
-  
-  return (
-    <div className="mb-10">
-      <h2 className="text-foreground text-xl font-semibold mb-4 px-4">{title}</h2>
-      <div className="carousel-container flex space-x-4 px-4 pb-2">
-        {items.map((item) => (
-          <ContentCard key={item.id} item={item} />
-        ))}
-      </div>
-    </div>
-  );
-}
+    <script src="https://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js" crossorigin></script>
 
-function HeroCarousel({ items }: { items: Content[] }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const navigate = useNavigate();
-  
-  // We need to call hooks unconditionally (before any return statements)
-  React.useEffect(() => {
-    if (!items || items.length === 0) return;
-    
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % items.length);
-    }, 8000);
-    
-    return () => clearInterval(interval);
-  }, [items]);
-  
-  if (!items || items.length === 0) return null;
-  
-  const currentItem = items[currentIndex];
-  
-  return (
-    <div className="relative h-[80vh] mb-8">
-      <div className="absolute inset-0">
-        <img 
-          src={currentItem?.backdropUrl || ''} 
-          alt={currentItem?.title || 'Destaque'} 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 hero-gradient" />
-      </div>
-      
-      <div className="absolute bottom-0 left-0 p-12 w-full md:w-1/2">
-        <motion.h1 
-          key={currentItem?.id || 'title'}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl md:text-5xl font-bold text-foreground mb-4"
-        >
-          {currentItem?.title || ''}
-        </motion.h1>
-        
-        <motion.p
-          key={`${currentItem?.id || 'id'}-synopsis`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-foreground/80 mb-6 line-clamp-3"
-        >
-          {currentItem?.synopsis || ''}
-        </motion.p>
-        
-        <motion.div
-          key={`${currentItem?.id || 'id'}-buttons`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex space-x-4"
-        >
-          <Button 
-            onClick={() => currentItem && navigate(`/detalhes/${currentItem.id}`)}
-            className="flex items-center"
-          >
-            <Info className="mr-2 h-4 w-4" />
-            Mais Informações
-          </Button>
-          
-          <Button variant="outline" className="flex items-center">
-            <Plus className="mr-2 h-4 w-4" />
-            Minha Lista
-          </Button>
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-// Pages
-function HomePage() {
-  const { data: allContent } = useQuery(["content"], apiClient.listContent);
-  const { data: featuredContent } = useQuery(["featuredContent"], apiClient.getFeaturedContent);
-  const { data: popularContent } = useQuery(["popularContent"], apiClient.getPopularContent);
-  const { data: recentContent } = useQuery(["recentContent"], apiClient.getRecentContent);
-  
-  // Filter movies and series
-  const movies = allContent?.filter(item => item.type === "movie") || [];
-  const series = allContent?.filter(item => item.type === "series") || [];
-  
-  return (
-    <div className="pt-16">
-      {featuredContent && <HeroCarousel items={featuredContent} />}
-      
-      <div className="container mx-auto">
-        <ContentRow title="Populares na CineStream" items={popularContent || []} />
-        <ContentRow title="Adicionados Recentemente" items={recentContent || []} />
-        <ContentRow title="Filmes" items={movies} />
-        <ContentRow title="Séries" items={series} />
-      </div>
-    </div>
-  );
-}
-
-function ContentDetailsPage() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const { data: content, isLoading } = useQuery(
-    ["content", id],
-    () => apiClient.getContentById({ id: id || "" }),
-    { enabled: !!id }
-  );
-  
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-  
-  if (!content) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-2xl font-bold mb-4">Conteúdo não encontrado</h1>
-        <Button onClick={() => navigate("/")}>Voltar para a página inicial</Button>
-      </div>
-    );
-  }
-  
-  return (
-    <div className="min-h-screen">
-      <div className="relative h-[70vh]">
-        <img 
-          src={content.backdropUrl} 
-          alt={content.title} 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
-        
-        <Button 
-          variant="ghost" 
-          className="absolute top-20 left-4"
-          onClick={() => navigate(-1)}
-        >
-          <ChevronLeft className="mr-2 h-4 w-4" />
-          Voltar
-        </Button>
-      </div>
-      
-      <div className="container mx-auto px-4 -mt-40 relative z-10">
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="w-full md:w-1/3 lg:w-1/4">
-            <img 
-              src={content.posterUrl} 
-              alt={content.title} 
-              className="w-full rounded-lg shadow-xl"
-            />
-          </div>
-          
-          <div className="w-full md:w-2/3 lg:w-3/4">
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-              {content.title}
-            </h1>
-            
-            <div className="flex flex-wrap items-center gap-4 mb-6">
-              <span className="text-foreground/80">{content.year}</span>
-              <span className="border border-foreground/40 px-2 py-1 text-sm rounded">
-                {content.quality}
-              </span>
-              {content.duration && (
-                <span className="text-foreground/80">{content.duration} min</span>
-              )}
-            </div>
-            
-            <div className="flex flex-wrap gap-2 mb-6">
-              {content.genres.map((genre) => (
-                <span 
-                  key={genre} 
-                  className="bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-sm"
-                >
-                  {genre}
-                </span>
-              ))}
-            </div>
-            
-            <p className="text-foreground/80 mb-8 text-lg">
-              {content.synopsis}
-            </p>
-            
-            <div className="flex flex-wrap gap-4">
-              <Button className="flex items-center">
-                <Play className="mr-2 h-4 w-4" />
-                Assistir
-              </Button>
-              
-              <Button variant="outline" className="flex items-center">
-                <Plus className="mr-2 h-4 w-4" />
-                Adicionar à Minha Lista
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CategoryPage() {
-  const { tipo } = useParams<{ tipo: string }>();
-  const { data: contentByType, isLoading } = useQuery(
-    ["contentByType", tipo],
-    () => apiClient.getContentByType({ type: tipo || "" }),
-    { enabled: !!tipo }
-  );
-  
-  const categoryTitle = tipo === "movie" ? "Filmes" : "Séries";
-  
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-  
-  return (
-    <div className="pt-24 container mx-auto px-4">
-      <h1 className="text-3xl font-bold mb-8">{categoryTitle}</h1>
-      
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-        {contentByType?.map((item) => (
-          <ContentCard key={item.id} item={item} />
-        ))}
-      </div>
-      
-      {(!contentByType || contentByType.length === 0) && (
-        <div className="text-center py-12">
-          <p className="text-foreground/60">Nenhum conteúdo encontrado nesta categoria.</p>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// Main App
-export default function App() {
-  return (
-    <Router>
-      <div className="min-h-screen bg-background text-foreground">
-        <Navbar />
-        
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/detalhes/:id" element={<ContentDetailsPage />} />
-          <Route path="/categoria/:tipo" element={<CategoryPage />} />
-        </Routes>
-      </div>
-    </Router>
-  );
-}
+    <script src="https://unpkg.com

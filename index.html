@@ -1,147 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PlayMaxx</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineStream</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body class="font-sans">
+    <!-- Header -->
+    <header class="bg-black px-6 py-4 flex items-center justify-between border-b border-gray-800">
+      <h1 class="text-3xl font-bold text-red-600">CineStream</h1>
+      <nav class="space-x-4">
+        <button onclick="filterCategory('todos')" class="text-white hover:text-red-600">Todos</button>
+        <button onclick="filterCategory('acao')" class="text-white hover:text-red-600">Ação</button>
+        <button onclick="filterCategory('comedia')" class="text-white hover:text-red-600">Comédia</button>
+        <button onclick="filterCategory('terror')" class="text-white hover:text-red-600">Terror</button>
+        <button onclick="filterCategory('drama')" class="text-white hover:text-red-600">Drama</button>
+        <button onclick="filterCategory('suspense')" class="text-white hover:text-red-600">Suspense</button>
+        <button onclick="filterCategory('series')" class="text-white hover:text-red-600">Séries</button>
+      </nav>
+    </header>
 
-    header {
-      background-color: #0ff;
-      color: #000;
-      padding: 20px;
-      text-align: center;
-      font-size: 2em;
-      font-weight: bold;
-    }
+    <!-- Conteúdo -->
+    <main class="p-6">
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Filme -->
+        <div class="movie-card acao cursor-pointer" onclick="window.open('https://drive.google.com/file/d/10IfMvC8IyrDcpz5AZIbQJVapQJLTPNo5/preview', '_blank')">
+          <img src="https://br.web.img2.acsta.net/img/d2/c1/d2c108f1e8523f4f16fbfb539e0f3e48.png" alt="Gananciosos" class="rounded-lg w-full h-60 object-cover">
+          <h3 class="mt-2 text-lg font-semibold">Gananciosos (2024)</h3>
+        </div>
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      padding: 15px;
-      background-color: #111;
-      flex-wrap: wrap;
-    }
+        <!-- Série: Mr. Robot -->
+        <div class="movie-card series">
+          <img src="https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-4840-622f-8180-c0893fef4097/raw?se=2025-05-17T04%3A30%3A25Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=bbd22fc4-f881-4ea4-b2f3-c12033cf6a8b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-17T03%3A25%3A09Z&ske=2025-05-18T03%3A25%3A09Z&sks=b&skv=2024-08-04&sig=pjJUwQZDuytOIRZTSKPfY%2Be%2BuDjWib9DEPlKoqHTAKc%3D" alt="Mr. Robot" class="rounded-lg w-full h-60 object-cover">
+          <h3 class="mt-2 text-lg font-semibold">Mr. Robot - 2ª Temporada</h3>
+          <div class="grid grid-cols-6 gap-2 mt-2">
+            [1,2,3,4,5,6,7,8,9,10,11,12].map(num => `
+              <img onclick="window.open('https://drive.google.com/file/d/${[
+                '1N9ILhLZGfz2_4fiLGkWCCiLuxIE83uLL',
+                '1gr0HfGnwWP1lk_8AI-SRKTGhXg7dv-au',
+                '1_R4t0MBt_ltY2wlYmyzHu_scVtKXGpH5',
+                '1KTuiKdVexP1SPCgYHidq0mzRjMtNud9Y',
+                '1R4iAP_PfJ1dZbeoq7LeLq0PQdQRWi-eD',
+                '1GTF7vG1eMNmr914TnwSQckybJVvDIYOi',
+                '1GTSFcJ5iipKP7sUKJ_uGd1aRbNXOSJvp',
+                '1Aq9iyF7Cp6uKpL4aOKlmBDR53YAuCfd3',
+                '1W71v-cTUUYlimY9eDfEwtv8B_bzZhrix',
+                '1SCY8o89DtUPCpiIX8QhqlnBtf4kUmfie',
+                '18oekgrFzS4Si_eS5C9adhAoOHUxDBjFJ'][num - 1]}/preview', '_blank')" src="https://img.icons8.com/ios-filled/50/ffffff/play.png" class="w-8 h-8 cursor-pointer" alt="Ep ${num}">
+            `).join('')
+          </div>
+        </div>
+      </section>
+    </main>
 
-    nav button {
-      background: #0ff;
-      color: #000;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+    <!-- Footer -->
+    <footer class="text-center text-gray-500 text-sm p-4 border-t border-gray-800 mt-10">
+      © 2025 CineStream - Todos os direitos reservados
+    </footer>
 
-    nav button:hover {
-      background-color: #0cc;
-    }
-
-    .container {
-      padding: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .movie-card {
-      background-color: #111;
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 15px;
-      max-width: 250px;
-      text-align: center;
-      box-shadow: 0 0 10px #0ff3;
-    }
-
-    .movie-card img {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #666;
-      font-size: 0.9em;
-      border-top: 1px solid #222;
-      margin-top: 40px;
-    }
-  </style>
-</head>
-<body>
-
-  <header>🎬 PlayMaxx</header>
-
-  <nav>
-    <button onclick="filterCategory('todos')">Todos</button>
-    <button onclick="filterCategory('acao')">Ação</button>
-    <button onclick="filterCategory('comedia')">Comédia</button>
-    <button onclick="filterCategory('terror')">Terror</button>
-    <button onclick="filterCategory('drama')">Drama</button>
-    <button onclick="filterCategory('suspense')">Suspense</button>
-    <button onclick="filterCategory('series')">Séries</button>
-  </nav>
-
-  <div class="container">
-
-    <!-- Filme: Gananciosos (2024) - Ação -->
-    <div class="movie-card acao">
-      <img src="https://br.web.img2.acsta.net/img/d2/c1/d2c108f1e8523f4f16fbfb539e0f3e48.png" alt="Gananciosos" onclick="window.open('https://drive.google.com/file/d/10IfMvC8IyrDcpz5AZIbQJVapQJLTPNo5/preview', '_blank')">
-      <h3>Gananciosos (2024)</h3>
-    </div>
-
-    <!-- Série: Mr. Robot (2017) Segunda Temporada -->
-    <div class="movie-card series">
-      <img src="https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-4840-622f-8180-c0893fef4097/raw?se=2025-05-17T04%3A30%3A25Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=bbd22fc4-f881-4ea4-b2f3-c12033cf6a8b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-17T03%3A25%3A09Z&ske=2025-05-18T03%3A25%3A09Z&sks=b&skv=2024-08-04&sig=pjJUwQZDuytOIRZTSKPfY%2Be%2BuDjWib9DEPlKoqHTAKc%3D" alt="Mr. Robot Segunda Temporada">
-      <h3>Mr. Robot - 2ª Temporada (2017)</h3>
-      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 2" onclick="window.open('https://drive.google.com/file/d/1con-RTUVBdDXpYugnizXqpv4q_gcKKrm/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 2" onclick="window.open('https://drive.google.com/file/d/1N9ILhLZGfz2_4fiLGkWCCiLuxIE83uLL/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 3" onclick="window.open('https://drive.google.com/file/d/1gr0HfGnwWP1lk_8AI-SRKTGhXg7dv-au/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 4" onclick="window.open('https://drive.google.com/file/d/1_R4t0MBt_ltY2wlYmyzHu_scVtKXGpH5/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 5" onclick="window.open('https://drive.google.com/file/d/1KTuiKdVexP1SPCgYHidq0mzRjMtNud9Y/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 6" onclick="window.open('https://drive.google.com/file/d/1R4iAP_PfJ1dZbeoq7LeLq0PQdQRWi-eD/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 7" onclick="window.open('https://drive.google.com/file/d/1GTF7vG1eMNmr914TnwSQckybJVvDIYOi/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 8" onclick="window.open('https://drive.google.com/file/d/1GTSFcJ5iipKP7sUKJ_uGd1aRbNXOSJvp/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 9" onclick="window.open('https://drive.google.com/file/d/1Aq9iyF7Cp6uKpL4aOKlmBDR53YAuCfd3/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 10" onclick="window.open('https://drive.google.com/file/d/1W71v-cTUUYlimY9eDfEwtv8B_bzZhrix/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 11" onclick="window.open('https://drive.google.com/file/d/1SCY8o89DtUPCpiIX8QhqlnBtf4kUmfie/preview', '_blank')">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" width="30" height="30" alt="Ep 12" onclick="window.open('https://drive.google.com/file/d/18oekgrFzS4Si_eS5C9adhAoOHUxDBjFJ/preview', '_blank')">
-      </div>
-    </div>
-
-  </div>
-
-  <footer>© 2025 PlayMaxx - Todos os direitos reservados</footer>
-
-  <script>
-    function filterCategory(category) {
-      const allCards = document.querySelectorAll('.movie-card');
-      allCards.forEach(card => {
-        if (category === 'todos' || card.classList.contains(category)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    // Mostrar todos os filmes por padrão
-    filterCategory('todos');
-  </script>
-
-</body>
+    <script>
+      function filterCategory(category) {
+        const allCards = document.querySelectorAll('.movie-card');
+        allCards.forEach(card => {
+          if (category === 'todos' || card.classList.contains(category)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+      filterCategory('todos');
+    </script>
+  </body>
 </html>

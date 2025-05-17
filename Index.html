@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Streaming Simples</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #141414;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #e50914;
+            margin-bottom: 20px;
+        }
+
+        .movie-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .movie-card {
+            background-color: #222;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .movie-card img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        .movie-info {
+            padding: 10px;
+        }
+
+        .movie-title {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+            position: relative;
+        }
+
+        .modal-content video {
+            width: 100%;
+            height: auto;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 1.5em;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Meu Catálogo de Filmes</h1>
+        <div class="movie-list">
+            <div class="movie-card" onclick="openModal('video1', 'Título do Filme 1', 'url_do_video_1.mp4', 'sinopse_do_filme_1.jpg')">
+                <img src="capa_do_filme_1.jpg" alt="Título do Filme 1">
+                <div class="movie-info">
+                    <h2 class="movie-title">Título do Filme 1</h2>
+                </div>
+            </div>
+            <div class="movie-card" onclick="openModal('video2', 'Título do Filme 2', 'url_do_video_2.mp4', 'sinopse_do_filme_2.jpg')">
+                <img src="capa_do_filme_2.jpg" alt="Título do Filme 2">
+                <div class="movie-info">
+                    <h2 class="movie-title">Título do Filme 2</h2>
+                </div>
+            </div>
+            </div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal()">×</button>
+            <h2 id="modal-title"></h2>
+            <video id="modal-video" controls></video>
+            <img id="modal-poster" style="display: none;" alt="Poster do Filme">
+        </div>
+    </div>
+
+    <script>
+        function openModal(videoId, title, videoUrl, posterUrl) {
+            const modal = document.getElementById('videoModal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalVideo = document.getElementById('modal-video');
+            const modalPoster = document.getElementById('modal-poster');
+
+            modalTitle.textContent = title;
+            modalVideo.src = videoUrl;
+
+            // Exibe o vídeo e esconde o poster (caso tenha sido usado anteriormente)
+            modalVideo.style.display = 'block';
+            modalPoster.style.display = 'none';
+
+            modal.style.display = 'flex';
+            modalVideo.play(); // Inicia o vídeo automaticamente ao abrir o modal
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modal-video');
+            modal.style.display = 'none';
+            modalVideo.pause(); // Pausa o vídeo ao fechar o modal
+            modalVideo.currentTime = 0; // Reinicia o vídeo para o início
+        }
+
+        // Adiciona funcionalidade para fechar o modal ao clicar fora dele
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

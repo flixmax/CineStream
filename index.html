@@ -118,7 +118,7 @@
     </div>
 
     <!-- Série: Mr. Robot (2017) - com controle de progresso -->
-    <div class="movie-card series" style="display: block; width: 100%; max-width: 1000px;">
+    <div class="movie-card series" style="display: block; max-width: 250px; width: 100%;">
       <div style="position: relative; margin-bottom: 20px;">
         <img src="https://media.fstatic.com/RLeRwo3k21aksjU9TBaRFln2ssU=/210x312/smart/filters:format(webp)/media/movies/covers/2016/07/mr-robot-2a-temporada_t126746_tF5sz4K.jpg" alt="Mr. Robot" style="width: 100%; border-radius: 10px;">
         <button id="mainEpisodeBtn" 
@@ -128,7 +128,7 @@
             left: 20px;
             background: #0ff;
             color: #000;
-            padding: 15px 25px;
+            padding: 10px 20px;
             font-size: 1em;
             border: none;
             border-radius: 5px;
@@ -138,22 +138,11 @@
         </button>
       </div>
 
-      <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; align-items: center;">
-        <div style="text-align: center;">
-          <img src="https://media.fstatic.com/RLeRwo3k21aksjU9TBaRFln2ssU=/210x312/smart/filters:format(webp)/media/movies/covers/2016/07/mr-robot-2a-temporada_t126746_tF5sz4K.jpg" alt="Ep 1" style="border-radius: 5px; width: 150px; height: 220px; object-fit: cover;">
-          <br />
-          <button id="episode1Btn"
-            style="margin-top: 10px; background: #0ff; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
-            ▶️ Assistir Episódio 1
-          </button>
-        </div>
-
-        <!-- Botão para ver desde o início -->
-        <button id="resetBtn"
-          style="background: #f00; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; height: 40px;">
-          🔄 Ver desde o Início
-        </button>
-      </div>
+      <!-- Botão para ver desde o início -->
+      <button id="resetBtn"
+        style="background: #f00; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px;">
+        🔄 Ver desde o Início
+      </button>
     </div>
 
   </div>
@@ -180,17 +169,14 @@
     const episodeUrl = 'https://drive.google.com/file/d/1con-RTUVBdDXpYugnizXqpv4q_gcKKrm/preview';
 
     const mainBtn = document.getElementById('mainEpisodeBtn');
-    const ep1Btn = document.getElementById('episode1Btn');
     const resetBtn = document.getElementById('resetBtn');
 
     function updateButtonText() {
       const started = localStorage.getItem(episodeKey);
       if (started) {
         mainBtn.textContent = '▶️ Continuar Episódio 1';
-        ep1Btn.textContent = '▶️ Continuar Episódio 1';
       } else {
         mainBtn.textContent = '▶️ Assistir Episódio 1';
-        ep1Btn.textContent = '▶️ Assistir Episódio 1';
       }
     }
 
@@ -206,7 +192,6 @@
     }
 
     mainBtn.addEventListener('click', openEpisode);
-    ep1Btn.addEventListener('click', openEpisode);
     resetBtn.addEventListener('click', resetProgress);
 
     updateButtonText();

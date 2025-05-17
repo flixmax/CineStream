@@ -27,6 +27,7 @@
       gap: 15px;
       padding: 15px;
       background-color: #111;
+      flex-wrap: wrap;
     }
 
     nav button {
@@ -103,11 +104,13 @@
     <button onclick="filterCategory('terror')">Terror</button>
     <button onclick="filterCategory('drama')">Drama</button>
     <button onclick="filterCategory('suspense')">Suspense</button>
+    <button onclick="filterCategory('series')">Séries</button>
+    <button onclick="filterCategory('recentes')">Adicionados Recentemente</button>
   </nav>
 
   <div class="container">
     <!-- Filme: Gananciosos (2024) - Ação -->
-    <div class="movie-card acao">
+    <div class="movie-card acao recentes">
       <img src="https://br.web.img2.acsta.net/img/d2/c1/d2c108f1e8523f4f16fbfb539e0f3e48.png" alt="Gananciosos">
       <h3>Gananciosos (2024)</h3>
       <button onclick="window.open('https://drive.google.com/file/d/10IfMvC8IyrDcpz5AZIbQJVapQJLTPNo5/preview', '_blank')">
@@ -115,7 +118,41 @@
       </button>
     </div>
 
-    <!-- Adicione mais filmes aqui, com classes como 'comedia', 'terror' etc. -->
+    <!-- Série: Caçadores de Mistérios (2023) - Séries, Suspense -->
+    <div class="movie-card series suspense recentes">
+      <img src="https://via.placeholder.com/250x350?text=Ca%C3%A7adores+de+Mist%C3%A9rios" alt="Caçadores de Mistérios">
+      <h3>Caçadores de Mistérios (2023)</h3>
+      <button onclick="window.open('https://drive.google.com/file/d/EXEMPLO_DE_LINK_SERIE/preview', '_blank')">
+        ▶️ Assistir
+      </button>
+    </div>
+
+    <!-- Filme: Riso Fácil (2022) - Comédia -->
+    <div class="movie-card comedia">
+      <img src="https://via.placeholder.com/250x350?text=Riso+F%C3%A1cil" alt="Riso Fácil">
+      <h3>Riso Fácil (2022)</h3>
+      <button onclick="window.open('https://drive.google.com/file/d/EXEMPLO_DE_LINK_FILME/preview', '_blank')">
+        ▶️ Assistir
+      </button>
+    </div>
+
+    <!-- Série: Drama Familiar (2024) - Séries, Drama, recentes -->
+    <div class="movie-card series drama recentes">
+      <img src="https://via.placeholder.com/250x350?text=Drama+Familiar" alt="Drama Familiar">
+      <h3>Drama Familiar (2024)</h3>
+      <button onclick="window.open('https://drive.google.com/file/d/EXEMPLO_DE_LINK_SERIE_2/preview', '_blank')">
+        ▶️ Assistir
+      </button>
+    </div>
+
+    <!-- Filme: Terror Noturno (2023) - Terror -->
+    <div class="movie-card terror">
+      <img src="https://via.placeholder.com/250x350?text=Terror+Noturno" alt="Terror Noturno">
+      <h3>Terror Noturno (2023)</h3>
+      <button onclick="window.open('https://drive.google.com/file/d/EXEMPLO_DE_LINK_TERROR/preview', '_blank')">
+        ▶️ Assistir
+      </button>
+    </div>
   </div>
 
   <footer>© 2025 PlayMaxx - Todos os direitos reservados</footer>
@@ -138,4 +175,3 @@
 
 </body>
 </html>
-
